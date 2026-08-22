@@ -8,6 +8,61 @@ O projeto consiste em uma engenharia reversa de documentação de software aplic
 
 Toda a documentação da entrega está disponível no GitHub Pages do projeto (ver seção abaixo).
 
+## Equipe
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/oalbertocavalcante.png" width="100"><br>
+      <a href="https://github.com/oalbertocavalcante">Alberto Côrtes</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/arturdcr.png" width="100"><br>
+      <a href="https://github.com/arturdcr">Artur de Camargos</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/youngburny.png" width="100"><br>
+      <a href="https://github.com/youngburny">Bruno Souza</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/CaioSoandrd.png" width="100"><br>
+      <a href="https://github.com/CaioSoandrd">Caio Soares</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/cauanicolas.png" width="100"><br>
+      <a href="https://github.com/cauanicolas">Cauã Nicolas</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/KaioAmouryUnB.png" width="100"><br>
+      <a href="https://github.com/KaioAmouryUnB">Kaio Amoury</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/surpesaiajin.png" width="100"><br>
+      <a href="https://github.com/surpesaiajin">Leonardo de Aquino</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/Borges061.png" width="100"><br>
+      <a href="https://github.com/Borges061">Luis Guilherme</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/ZarbL.png" width="100"><br>
+      <a href="https://github.com/ZarbL">Luis Zarbielli</a>
+    </td>
+    <td align="center">
+      <img src="https://github.com/Maria-Laura-Regis.png" width="100"><br>
+      <a href="https://github.com/Maria-Laura-Regis">Maria Laura</a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="https://github.com/Pedrovargas10.png" width="100"><br>
+      <a href="https://github.com/Pedrovargas10">Pedro Vargas</a>
+    </td>
+  </tr>
+</table>
+
 ## Tecnologia
 
 A geração do site estático de documentação é feita com o [docsify](https://docsify.js.org/), a partir dos arquivos Markdown presentes na pasta `docs/`.
