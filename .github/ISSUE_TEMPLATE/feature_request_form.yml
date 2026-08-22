@@ -1,49 +1,49 @@
-name: Feature Request
-description: Suggest an idea for this project
+name: Solicitação de Funcionalidade
+description: Sugerir uma ideia para este projeto
 labels: ["feature-request"]
 body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this feature request!
+        Obrigado por reservar um tempo para preencher esta solicitação de funcionalidade!
   - type: input
     id: contact
     attributes:
-      label: Contact Details (optional)
-      description: How can we get in touch with you if we need more info?
-      placeholder: ex. email@example.com
+      label: Dados de contato (opcional)
+      description: Como podemos entrar em contato se precisarmos de mais informações?
+      placeholder: ex. email@exemplo.com
     validations:
       required: false
   - type: textarea
     id: summary
     attributes:
-      label: Summary
-      description: Describe the requested feature.
+      label: Resumo
+      description: Descreva a funcionalidade solicitada.
     validations:
       required: true
   - type: textarea
     id: motivation
     attributes:
-      label: Motivation
-      description: Describe the motivation behind this feature request.
+      label: Motivação
+      description: Descreva a motivação por trás desta solicitação.
     validations:
       required: true
   - type: textarea
     id: alternatives
     attributes:
-      label: Alternatives
-      description: Describe the alternatives you've considered.
+      label: Alternativas
+      description: Descreva as alternativas que você já considerou.
     validations:
       required: false
   - type: textarea
     id: additional-information
     attributes:
-      label: Additional Context
+      label: Contexto Adicional
   - type: checkboxes
     id: terms
     attributes:
-      label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](../blob/master/CODE_OF_CONDUCT.md)
+      label: Código de Conduta
+      description: Ao enviar esta issue, você concorda em seguir nosso [Código de Conduta](../blob/master/CODE_OF_CONDUCT.md)
       options:
-        - label: I agree to follow this project's Code of Conduct
+        - label: Eu concordo em seguir o Código de Conduta deste projeto
           required: true
