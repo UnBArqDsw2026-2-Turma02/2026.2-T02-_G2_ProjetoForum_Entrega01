@@ -1,0 +1,90 @@
+# ferramentas de IA / assistentes de codigo - nao versionar
+.claude/
+.claude-code/
+.clauderules
+CLAUDE.md
+.cursor/
+.cursorrules
+.cursorignore
+.windsurf/
+.windsurfrules
+.codeium/
+.continue/
+.aider*
+.clinerules/
+.roo/
+.roomodes
+.cody/
+.amazonq/
+.qodo/
+.augment/
+.augmentrules
+.agent/
+.agents/
+AGENTS.md
+.mcp.json
+.github/copilot-instructions.md
+*.agent
+
+# sistema operacional
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# editores / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+dist/
+build/
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+out/
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.mypy_cache/
+.pytest_cache/
+
+# variaveis de ambiente e segredos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# logs e temporarios
+*.log
+*.tmp
+*.bak
+*.orig
+
+# compactados / backups
+*.zip
+*.rar
+*.7z
