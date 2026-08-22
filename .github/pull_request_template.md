@@ -1,24 +1,24 @@
 
-Describe the big picture of your changes here to communicate to the maintainers why we should accept this pull request. If it fixes a bug or resolves a feature request, be sure to link to that issue.
+Descreva aqui o panorama geral das suas alterações, para comunicar aos mantenedores por que este pull request deveria ser aceito. Se ele corrige um bug ou resolve uma solicitação de funcionalidade, inclua o link para a issue correspondente.
 
-## Types of changes
+## Tipos de alteração
 
-What types of changes does your code introduce to <repo_name>?
-_Put an `x` in the boxes that apply_
+Que tipos de alteração este código introduz no repositório?
+_Marque com um `x` as opções que se aplicam_
 
-- [ ] Bugfix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
-- [ ] Documentation Update (if none of the other choices apply)
+- [ ] Correção de bug (alteração sem quebra de compatibilidade que corrige um problema)
+- [ ] Nova funcionalidade (alteração sem quebra de compatibilidade que adiciona uma funcionalidade)
+- [ ] Alteração com quebra de compatibilidade (correção ou funcionalidade que faria uma funcionalidade existente deixar de funcionar como esperado)
+- [ ] Atualização de documentação (caso nenhuma das opções anteriores se aplique)
 
 ## Checklist
 
-_Put an `x` in the boxes that apply. You can also fill these out after creating the PR. If you're unsure about any of them, don't hesitate to ask. We're here to help! This is simply a reminder of what we are going to look for before merging your code._
+_Marque com um `x` as opções que se aplicam. Você também pode preenchê-las depois de criar o PR. Se tiver dúvidas sobre alguma delas, não hesite em perguntar. Isto é apenas um lembrete do que será verificado antes de mesclar o código._
 
-- [ ] I have read the CONTRIBUTING.md doc.
-- [ ] I have added necessary documentation (if appropriate).
-- [ ] Any dependent changes have been merged and published in downstream modules.
+- [ ] Li o documento CONTRIBUTING.md.
+- [ ] Adicionei a documentação necessária (se aplicável).
+- [ ] Eventuais alterações dependentes já foram mescladas e publicadas nos módulos correspondentes.
 
-## Further comments
+## Comentários adicionais
 
-If this is a relatively large or complex change, kick off the discussion by explaining why you chose the solution you did and what alternatives you considered, etc...
+Se esta for uma alteração relativamente grande ou complexa, inicie a discussão explicando por que você escolheu essa solução e quais alternativas considerou, etc.

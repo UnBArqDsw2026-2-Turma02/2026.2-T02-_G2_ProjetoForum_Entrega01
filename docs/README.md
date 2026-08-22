@@ -15,6 +15,7 @@
 | 22/1029196  |  [Bruno Souza Assis Furtado](https://github.com/youngburny) | <img src="https://github.com/youngburny.png" width=70> |
 | 23/2014638  |  [Caio Soares de Andrade](https://github.com/CaioSoandrd) | <img src="https://github.com/CaioSoandrd.png" width=70> |
 | 23/1026670  |  [Cauã Nicolas Pereira de Oliveira](https://github.com/cauanicolas) | <img src="https://github.com/cauanicolas.png" width=70> |
+| 24/1012276  |  [Kaio Amoury Sasaki Acacio](https://github.com/KaioAmouryUnB) | <img src="https://github.com/KaioAmouryUnB.png" width=70> |
 | 23/1026438  |  [Leonardo de Aquino Silveira Braga](https://github.com/surpesaiajin) | <img src="https://github.com/surpesaiajin.png" width=70> |
 | 21/1043807  |  [Luis Fernando de Sousa Zarbielli](https://github.com/ZarbL) | <img src="https://github.com/ZarbL.png" width=70> |
 | 21/1045178  |  [Luis Guilherme Borges](https://github.com/Borges061) | <img src="https://github.com/Borges061.png" width=70> |
