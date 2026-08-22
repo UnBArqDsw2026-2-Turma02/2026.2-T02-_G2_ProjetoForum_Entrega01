@@ -10,17 +10,17 @@
 
 |Matrícula | Aluno | 📸 |
 | :--: | :--: | :--: |
-| 23/2014610  |  [Alberto Côrtes Cavalcante](https://github.com/oalbertocavalcante) | <img src="https://github.com/oalbertocavalcante.png" width=70> |
-| 22/1038785  |  [Artur de Camargos Rodrigues](https://github.com/arturdcr) | <img src="https://github.com/arturdcr.png" width=70> |
-| 22/1029196  |  [Bruno Souza Assis Furtado](https://github.com/youngburny) | <img src="https://github.com/youngburny.png" width=70> |
-| 23/2014638  |  [Caio Soares de Andrade](https://github.com/CaioSoandrd) | <img src="https://github.com/CaioSoandrd.png" width=70> |
-| 23/1026670  |  [Cauã Nicolas Pereira de Oliveira](https://github.com/cauanicolas) | <img src="https://github.com/cauanicolas.png" width=70> |
-| 24/1012276  |  [Kaio Amoury Sasaki Acacio](https://github.com/KaioAmouryUnB) | <img src="https://github.com/KaioAmouryUnB.png" width=70> |
-| 23/1026438  |  [Leonardo de Aquino Silveira Braga](https://github.com/surpesaiajin) | <img src="https://github.com/surpesaiajin.png" width=70> |
-| 21/1043807  |  [Luis Fernando de Sousa Zarbielli](https://github.com/ZarbL) | <img src="https://github.com/ZarbL.png" width=70> |
-| 21/1045178  |  [Luis Guilherme Borges](https://github.com/Borges061) | <img src="https://github.com/Borges061.png" width=70> |
-| 23/2005361  |  [Maria Laura Regis Cabral Dias](https://github.com/Maria-Laura-Regis) | <img src="https://github.com/Maria-Laura-Regis.png" width=70> |
-| 23/1039178  |  [Pedro Felipe Silva Vargas](https://github.com/Pedrovargas10) | <img src="https://github.com/Pedrovargas10.png" width=70> |
+| 232014610  |  [Alberto Côrtes Cavalcante](https://github.com/oalbertocavalcante) | <img src="https://github.com/oalbertocavalcante.png" width=70> |
+| 221038785  |  [Artur de Camargos Rodrigues](https://github.com/arturdcr) | <img src="https://github.com/arturdcr.png" width=70> |
+| 221029196  |  [Bruno Souza Assis Furtado](https://github.com/youngburny) | <img src="https://github.com/youngburny.png" width=70> |
+| 232014638  |  [Caio Soares de Andrade](https://github.com/CaioSoandrd) | <img src="https://github.com/CaioSoandrd.png" width=70> |
+| 231026670  |  [Cauã Nicolas Pereira de Oliveira](https://github.com/cauanicolas) | <img src="https://github.com/cauanicolas.png" width=70> |
+| 241012276  |  [Kaio Amoury Sasaki Acacio](https://github.com/KaioAmouryUnB) | <img src="https://github.com/KaioAmouryUnB.png" width=70> |
+| 231026438  |  [Leonardo de Aquino Silveira Braga](https://github.com/surpesaiajin) | <img src="https://github.com/surpesaiajin.png" width=70> |
+| 211043807  |  [Luis Fernando de Sousa Zarbielli](https://github.com/ZarbL) | <img src="https://github.com/ZarbL.png" width=70> |
+| 211045178  |  [Luis Guilherme Borges](https://github.com/Borges061) | <img src="https://github.com/Borges061.png" width=70> |
+| 232005361  |  [Maria Laura Regis Cabral Dias](https://github.com/Maria-Laura-Regis) | <img src="https://github.com/Maria-Laura-Regis.png" width=70> |
+| 231039178  |  [Pedro Felipe Silva Vargas](https://github.com/Pedrovargas10) | <img src="https://github.com/Pedrovargas10.png" width=70> |
 
 </center>
 
