@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="680" viewBox="0 0 1400 680" role="img" aria-labelledby="title desc">
+  <title id="title">BPMN do fluxo de pergunta, resposta e resolução</title>
+  <desc id="desc">Modelo BPMN com as lanes Autor da pergunta, Comunidade e Plataforma.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#263238" />
+    </marker>
+    <style>
+      .pool { fill: #ffffff; stroke: #263238; stroke-width: 2; }
+      .lane-author { fill: #f7fbff; stroke: #607d8b; stroke-width: 1.5; }
+      .lane-community { fill: #fbf9ff; stroke: #607d8b; stroke-width: 1.5; }
+      .lane-platform { fill: #fffaf5; stroke: #607d8b; stroke-width: 1.5; }
+      .task { fill: #ffffff; stroke: #263238; stroke-width: 2; rx: 12; }
+      .gateway { fill: #ffffff; stroke: #263238; stroke-width: 2; }
+      .event { fill: #ffffff; stroke: #263238; stroke-width: 2; }
+      .end-event { fill: #ffffff; stroke: #263238; stroke-width: 3; }
+      .flow { fill: none; stroke: #263238; stroke-width: 2.2; marker-end: url(#arrow); }
+      .label { fill: #263238; font-family: Arial, Helvetica, sans-serif; font-size: 15px; text-anchor: middle; }
+      .small-label { fill: #263238; font-family: Arial, Helvetica, sans-serif; font-size: 13px; text-anchor: middle; }
+      .lane-label { fill: #37474f; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 600; text-anchor: middle; }
+      .pool-label { fill: #37474f; font-family: Arial, Helvetica, sans-serif; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .condition { fill: #263238; font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 600; }
+    </style>
+  </defs>
+
+  <rect x="40" y="40" width="1320" height="560" class="pool" />
+  <rect x="40" y="40" width="80" height="560" fill="#eceff1" stroke="#263238" stroke-width="2" />
+  <rect x="120" y="40" width="1240" height="187" class="lane-author" />
+  <rect x="120" y="227" width="1240" height="187" class="lane-community" />
+  <rect x="120" y="414" width="1240" height="186" class="lane-platform" />
+
+  <text x="80" y="320" class="pool-label" transform="rotate(-90 80 320)">Fórum</text>
+  <text x="105" y="133" class="lane-label" transform="rotate(-90 105 133)">Autor da pergunta</text>
+  <text x="105" y="320" class="lane-label" transform="rotate(-90 105 320)">Comunidade</text>
+  <text x="105" y="507" class="lane-label" transform="rotate(-90 105 507)">Plataforma</text>
+
+  <circle cx="155" cy="133" r="18" class="event" />
+  <text x="130" y="73" class="small-label" text-anchor="start">Necessidade identificada</text>
+
+  <rect x="205" y="93" width="125" height="80" class="task" />
+  <text x="267" y="128" class="label"><tspan x="267" dy="0">Publicar</tspan><tspan x="267" dy="20">pergunta</tspan></text>
+
+  <rect x="390" y="93" width="135" height="80" class="task" />
+  <text x="457" y="122" class="label"><tspan x="457" dy="0">Acompanhar</tspan><tspan x="457" dy="20">contribuições</tspan></text>
+
+  <polygon points="845,108 870,133 845,158 820,133" class="gateway" />
+  <path d="M833 121 L857 145 M857 121 L833 145" stroke="#263238" stroke-width="2" />
+  <text x="845" y="82" class="small-label">Resposta resolve?</text>
+
+  <rect x="900" y="93" width="150" height="80" class="task" />
+  <text x="975" y="118" class="label"><tspan x="975" dy="0">Marcar resposta</tspan><tspan x="975" dy="20">como aceita</tspan></text>
+
+  <circle cx="1100" cy="133" r="18" class="end-event" />
+  <text x="1100" y="178" class="small-label">Pergunta resolvida</text>
+
+  <rect x="390" y="267" width="135" height="80" class="task" />
+  <text x="457" y="297" class="label"><tspan x="457" dy="0">Responder</tspan><tspan x="457" dy="20">e avaliar</tspan></text>
+
+  <polygon points="610,294 635,319 610,344 585,319" class="gateway" />
+  <path d="M598 307 L622 331 M622 307 L598 331" stroke="#263238" stroke-width="2" />
+  <text x="575" y="380" class="small-label" text-anchor="end">Pergunta fechada?</text>
+
+  <rect x="685" y="267" width="135" height="80" class="task" />
+  <text x="752" y="297" class="label"><tspan x="752" dy="0">Solicitar</tspan><tspan x="752" dy="20">reabertura</tspan></text>
+
+  <rect x="220" y="454" width="135" height="80" class="task" />
+  <text x="287" y="484" class="label"><tspan x="287" dy="0">Disponibilizar</tspan><tspan x="287" dy="20">pergunta</tspan></text>
+
+  <circle cx="760" cy="494" r="18" class="event" />
+  <circle cx="760" cy="494" r="13" fill="none" stroke="#263238" stroke-width="1.5" />
+  <path d="M760 484 L760 494 L767 498" fill="none" stroke="#263238" stroke-width="1.5" />
+  <text x="760" y="548" class="small-label">Aguardar novas contribuições</text>
+
+  <path d="M173 133 L205 133" class="flow" />
+  <path d="M267 173 L267 420 L287 420 L287 454" class="flow" />
+  <path d="M355 494 L375 494 L375 307 L390 307" class="flow" />
+  <path d="M525 307 L550 307 L550 200 L457 200 L457 173" class="flow" />
+  <path d="M457 173 L457 245 L610 245 L610 294" class="flow" />
+  <path d="M635 319 L665 400 L835 400 L835 158 L845 158" class="flow" />
+  <text x="670" y="390" class="condition">Não</text>
+  <path d="M870 133 L900 133" class="flow" />
+  <text x="883" y="105" class="condition">Sim</text>
+  <path d="M845 158 L845 205 L950 205 L950 430 L760 430 L760 476" class="flow" />
+  <text x="865" y="220" class="condition">Não</text>
+  <path d="M760 512 L375 512 L375 307 L390 307" class="flow" />
+  <path d="M635 319 L685 319" class="flow" />
+  <text x="657" y="310" class="condition">Sim</text>
+  <path d="M752 347 L752 382 L375 382 L375 307 L390 307" class="flow" />
+  <path d="M1050 133 L1082 133" class="flow" />
+
+  <text x="700" y="635" class="small-label">Fonte: modelo BPMN 2.0 da SubEquipe 02 — rastreabilidade ER-C01 a ER-C04</text>
+</svg>
