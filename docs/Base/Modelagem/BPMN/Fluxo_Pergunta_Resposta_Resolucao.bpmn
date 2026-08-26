@@ -39,21 +39,21 @@
     <bpmn:startEvent id="Start_Question" name="Necessidade identificada">
       <bpmn:outgoing>Flow_Start_Publish</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:task id="Task_Publish" name="Publicar pergunta">
+    <bpmn:task id="Task_Publish" name="Publica pergunta">
       <bpmn:incoming>Flow_Start_Publish</bpmn:incoming>
       <bpmn:outgoing>Flow_Publish_Available</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:task id="Task_Available" name="Disponibilizar pergunta">
+    <bpmn:task id="Task_Available" name="Disponibiliza pergunta">
       <bpmn:incoming>Flow_Publish_Available</bpmn:incoming>
       <bpmn:outgoing>Flow_Available_Respond</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:task id="Task_Respond" name="Responder e avaliar">
+    <bpmn:task id="Task_Respond" name="Responde e avalia">
       <bpmn:incoming>Flow_Available_Respond</bpmn:incoming>
       <bpmn:incoming>Flow_Wait_Respond</bpmn:incoming>
       <bpmn:incoming>Flow_Reopen_Respond</bpmn:incoming>
       <bpmn:outgoing>Flow_Respond_Monitor</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:task id="Task_Monitor" name="Acompanhar contribuições">
+    <bpmn:task id="Task_Monitor" name="Acompanha contribuições">
       <bpmn:incoming>Flow_Respond_Monitor</bpmn:incoming>
       <bpmn:outgoing>Flow_Monitor_Closed</bpmn:outgoing>
     </bpmn:task>
@@ -62,7 +62,7 @@
       <bpmn:outgoing>Flow_Resolution_Yes</bpmn:outgoing>
       <bpmn:outgoing>Flow_Resolution_No</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:task id="Task_Accept" name="Marcar resposta como aceita">
+    <bpmn:task id="Task_Accept" name="Marca resposta como aceita">
       <bpmn:incoming>Flow_Resolution_Yes</bpmn:incoming>
       <bpmn:outgoing>Flow_Accept_Resolved</bpmn:outgoing>
     </bpmn:task>
@@ -79,7 +79,7 @@
       <bpmn:outgoing>Flow_Closed_Yes</bpmn:outgoing>
       <bpmn:outgoing>Flow_Closed_No</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:task id="Task_Reopen" name="Solicitar reabertura">
+    <bpmn:task id="Task_Reopen" name="Solicita reabertura">
       <bpmn:incoming>Flow_Closed_Yes</bpmn:incoming>
       <bpmn:outgoing>Flow_Reopen_Respond</bpmn:outgoing>
     </bpmn:task>

@@ -39,33 +39,33 @@
   <text x="130" y="73" class="small-label" text-anchor="start">Necessidade identificada</text>
 
   <rect x="205" y="93" width="125" height="80" class="task" />
-  <text x="267" y="128" class="label"><tspan x="267" dy="0">Publicar</tspan><tspan x="267" dy="20">pergunta</tspan></text>
+  <text x="267" y="128" class="label"><tspan x="267" dy="0">Publica</tspan><tspan x="267" dy="20">pergunta</tspan></text>
 
   <rect x="390" y="93" width="135" height="80" class="task" />
-  <text x="457" y="122" class="label"><tspan x="457" dy="0">Acompanhar</tspan><tspan x="457" dy="20">contribuições</tspan></text>
+  <text x="457" y="122" class="label"><tspan x="457" dy="0">Acompanha</tspan><tspan x="457" dy="20">contribuições</tspan></text>
 
   <polygon points="845,108 870,133 845,158 820,133" class="gateway" />
   <path d="M833 121 L857 145 M857 121 L833 145" stroke="#263238" stroke-width="2" />
   <text x="845" y="82" class="small-label">Resposta resolve?</text>
 
   <rect x="900" y="93" width="150" height="80" class="task" />
-  <text x="975" y="118" class="label"><tspan x="975" dy="0">Marcar resposta</tspan><tspan x="975" dy="20">como aceita</tspan></text>
+  <text x="975" y="118" class="label"><tspan x="975" dy="0">Marca resposta</tspan><tspan x="975" dy="20">como aceita</tspan></text>
 
   <circle cx="1100" cy="133" r="18" class="end-event" />
   <text x="1100" y="178" class="small-label">Pergunta resolvida</text>
 
   <rect x="390" y="267" width="135" height="80" class="task" />
-  <text x="457" y="297" class="label"><tspan x="457" dy="0">Responder</tspan><tspan x="457" dy="20">e avaliar</tspan></text>
+  <text x="457" y="297" class="label"><tspan x="457" dy="0">Responde</tspan><tspan x="457" dy="20">e avalia</tspan></text>
 
   <polygon points="610,294 635,319 610,344 585,319" class="gateway" />
   <path d="M598 307 L622 331 M622 307 L598 331" stroke="#263238" stroke-width="2" />
   <text x="575" y="380" class="small-label" text-anchor="end">Pergunta fechada?</text>
 
   <rect x="685" y="267" width="135" height="80" class="task" />
-  <text x="752" y="297" class="label"><tspan x="752" dy="0">Solicitar</tspan><tspan x="752" dy="20">reabertura</tspan></text>
+  <text x="752" y="297" class="label"><tspan x="752" dy="0">Solicita</tspan><tspan x="752" dy="20">reabertura</tspan></text>
 
   <rect x="220" y="454" width="135" height="80" class="task" />
-  <text x="287" y="484" class="label"><tspan x="287" dy="0">Disponibilizar</tspan><tspan x="287" dy="20">pergunta</tspan></text>
+  <text x="287" y="484" class="label"><tspan x="287" dy="0">Disponibiliza</tspan><tspan x="287" dy="20">pergunta</tspan></text>
 
   <circle cx="760" cy="494" r="18" class="event" />
   <circle cx="760" cy="494" r="13" fill="none" stroke="#263238" stroke-width="1.5" />
