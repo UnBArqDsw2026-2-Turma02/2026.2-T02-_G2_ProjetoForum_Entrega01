@@ -1,0 +1,736 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_StackOverflow_Final" targetNamespace="https://unb.br/bpmn/stackoverflow/final" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="18.25.1">
+  <bpmn:message id="Message_Question" name="Pergunta publicada" />
+  <bpmn:message id="Message_Answer" name="Resposta publicada" />
+  <bpmn:message id="Message_CorrectionRequest" name="Correção solicitada" />
+  <bpmn:message id="Message_Correction" name="Pergunta corrigida" />
+  <bpmn:message id="Message_ModerationResult" name="Resultado da moderação" />
+  <bpmn:collaboration id="Collaboration_StackOverflow_Final">
+    <bpmn:participant id="Participant_User" name="Usuário" processRef="Process_User" />
+    <bpmn:participant id="Participant_StackOverflow" name="Stack Overflow" processRef="Process_StackOverflow" />
+    <bpmn:messageFlow id="MessageFlow_Question" name="Pergunta publicada" sourceRef="Send_Question" targetRef="Start_Question" />
+    <bpmn:messageFlow id="MessageFlow_Answer" name="Resposta publicada" sourceRef="Send_Answer" targetRef="Catch_Answer" />
+    <bpmn:messageFlow id="MessageFlow_CorrectionRequest" name="Solicitação de correção" sourceRef="Send_RequestCorrection" targetRef="Catch_CorrectionRequest" />
+    <bpmn:messageFlow id="MessageFlow_Correction" name="Pergunta corrigida" sourceRef="Send_Correction" targetRef="Catch_Correction" />
+    <bpmn:messageFlow id="MessageFlow_Approved" name="Publicação mantida" sourceRef="Send_Approval" targetRef="Catch_ModerationResult" />
+    <bpmn:messageFlow id="MessageFlow_Decision" name="Publicação fechada ou removida" sourceRef="Send_Decision" targetRef="Catch_ModerationResult" />
+    <bpmn:messageFlow id="MessageFlow_Kept" name="Publicação mantida" sourceRef="Send_KeepPublication" targetRef="Catch_ModerationResult" />
+    <bpmn:textAnnotation id="TextAnnotation_Inclusive">
+      <bpmn:text>Gateway inclusivo: a comunidade pode responder, sinalizar ou realizar as duas ações.</bpmn:text>
+    </bpmn:textAnnotation>
+    <bpmn:association id="Association_Inclusive" sourceRef="Gateway_CommunityAction" targetRef="TextAnnotation_Inclusive" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_User" name="Participação do usuário" isExecutable="false">
+    <bpmn:documentation>O usuário pesquisa conteúdo existente, autentica-se quando necessário, publica a pergunta e reage às respostas ou à moderação.</bpmn:documentation>
+    <bpmn:startEvent id="Start_Doubt" name="Dúvida técnica identificada" />
+    <bpmn:userTask id="Task_Search" name="Pesquisa perguntas existentes" />
+    <bpmn:exclusiveGateway id="Gateway_Found" name="Encontra pergunta semelhante?" />
+    <bpmn:userTask id="Task_Consult" name="Consulta respostas existentes" />
+    <bpmn:sendTask id="Send_Question" name="Publica pergunta" />
+    <bpmn:eventBasedGateway id="Gateway_WaitFeedback" name="Aguarda retorno" />
+    <bpmn:intermediateCatchEvent id="Catch_Answer" name="Resposta recebida">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_Answer" messageRef="Message_Answer" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:userTask id="Task_Evaluate" name="Avalia resposta" />
+    <bpmn:userTask id="Task_Edit" name="Corrige pergunta" />
+    <bpmn:sendTask id="Send_Correction" name="Reenvia pergunta corrigida" />
+    <bpmn:intermediateCatchEvent id="Catch_ModerationResult" name="Resultado recebido">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_ModerationResult" messageRef="Message_ModerationResult" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="Gateway_Kept" name="Publicação foi mantida?" default="Flow_U24" />
+    <bpmn:endEvent id="End_Moderated" name="Publicação encerrada pela moderação" />
+    <bpmn:exclusiveGateway id="Gateway_Logged" name="Está autenticado?">
+      <bpmn:incoming>Flow_U05</bpmn:incoming>
+      <bpmn:outgoing>Flow_U06</bpmn:outgoing>
+      <bpmn:outgoing>Flow_03skmfd</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_Login" name="Realiza login">
+      <bpmn:incoming>Flow_U06</bpmn:incoming>
+      <bpmn:outgoing>Flow_0cn2zot</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_Write" name="Redige pergunta">
+      <bpmn:incoming>Flow_03skmfd</bpmn:incoming>
+      <bpmn:incoming>Flow_0cn2zot</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_Tags" name="Informa tags" />
+    <bpmn:endEvent id="End_Solved" name="Dúvida solucionada" />
+    <bpmn:userTask id="Task_Accept" name="Aceita resposta" />
+    <bpmn:exclusiveGateway id="Gateway_Solved" name="Resposta soluciona a dúvida?" default="Flow_U20" />
+    <bpmn:intermediateCatchEvent id="Catch_CorrectionRequest" name="Correção solicitada">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_CorrectionRequest" messageRef="Message_CorrectionRequest" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="End_Existing" name="Dúvida solucionada" />
+    <bpmn:sequenceFlow id="Flow_U01" sourceRef="Start_Doubt" targetRef="Task_Search" />
+    <bpmn:sequenceFlow id="Flow_U02" sourceRef="Task_Search" targetRef="Gateway_Found" />
+    <bpmn:sequenceFlow id="Flow_U03" name="Sim" sourceRef="Gateway_Found" targetRef="Task_Consult">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">perguntaSemelhanteEncontrada</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_U05" name="Não" sourceRef="Gateway_Found" targetRef="Gateway_Logged" />
+    <bpmn:sequenceFlow id="Flow_U04" sourceRef="Task_Consult" targetRef="End_Existing" />
+    <bpmn:sequenceFlow id="Flow_U11" sourceRef="Task_Tags" targetRef="Send_Question" />
+    <bpmn:sequenceFlow id="Flow_U12" sourceRef="Send_Question" targetRef="Gateway_WaitFeedback" />
+    <bpmn:sequenceFlow id="Flow_U20" name="Não" sourceRef="Gateway_Solved" targetRef="Gateway_WaitFeedback" />
+    <bpmn:sequenceFlow id="Flow_U23" sourceRef="Send_Correction" targetRef="Gateway_WaitFeedback" />
+    <bpmn:sequenceFlow id="Flow_U26" name="Sim" sourceRef="Gateway_Kept" targetRef="Gateway_WaitFeedback">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">publicacaoMantida</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_U13" sourceRef="Gateway_WaitFeedback" targetRef="Catch_Answer" />
+    <bpmn:sequenceFlow id="Flow_U14" sourceRef="Gateway_WaitFeedback" targetRef="Catch_CorrectionRequest" />
+    <bpmn:sequenceFlow id="Flow_U15" sourceRef="Gateway_WaitFeedback" targetRef="Catch_ModerationResult" />
+    <bpmn:sequenceFlow id="Flow_U16" sourceRef="Catch_Answer" targetRef="Task_Evaluate" />
+    <bpmn:sequenceFlow id="Flow_U17" sourceRef="Task_Evaluate" targetRef="Gateway_Solved" />
+    <bpmn:sequenceFlow id="Flow_U21" sourceRef="Catch_CorrectionRequest" targetRef="Task_Edit" />
+    <bpmn:sequenceFlow id="Flow_U22" sourceRef="Task_Edit" targetRef="Send_Correction" />
+    <bpmn:sequenceFlow id="Flow_U25" sourceRef="Catch_ModerationResult" targetRef="Gateway_Kept" />
+    <bpmn:sequenceFlow id="Flow_U24" name="Não" sourceRef="Gateway_Kept" targetRef="End_Moderated" />
+    <bpmn:sequenceFlow id="Flow_U06" name="Não" sourceRef="Gateway_Logged" targetRef="Task_Login" />
+    <bpmn:sequenceFlow id="Flow_03skmfd" name="Sim" sourceRef="Gateway_Logged" targetRef="Task_Write" />
+    <bpmn:sequenceFlow id="Flow_0cn2zot" sourceRef="Task_Login" targetRef="Task_Write" />
+    <bpmn:sequenceFlow id="Flow_U10" sourceRef="Task_Write" targetRef="Task_Tags" />
+    <bpmn:sequenceFlow id="Flow_U19" sourceRef="Task_Accept" targetRef="End_Solved" />
+    <bpmn:sequenceFlow id="Flow_U18" name="Sim" sourceRef="Gateway_Solved" targetRef="Task_Accept">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">duvidaSolucionada</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmn:process id="Process_StackOverflow" name="Participação da comunidade e moderação" isExecutable="false">
+    <bpmn:documentation>A piscina Stack Overflow contém dois papéis internos. A comunidade responde ou sinaliza; o moderador ou usuário confiável analisa as exceções.</bpmn:documentation>
+    <bpmn:laneSet id="LaneSet_StackOverflow">
+      <bpmn:lane id="Lane_Moderator" name="Moderador / Usuário confiável">
+        <bpmn:flowNodeRef>Task_KeepPublication</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Correctable</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Adequate</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Catch_Correction</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Reevaluate</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Approved</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Send_Approval</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_FlagClosed</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ReviewFlag</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Violation</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Send_RequestCorrection</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Closed</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Send_Decision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CloseOrRemove</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Send_KeepPublication</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Community" name="Comunidade">
+        <bpmn:flowNodeRef>Start_Question</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AnalyzeQuestion</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_CommunityAction</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_DraftAnswer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Send_Answer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Answer</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_FlagContent</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Question" name="Pergunta recebida">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_Question" messageRef="Message_Question" />
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_AnalyzeQuestion" name="Analisa pergunta" />
+    <bpmn:inclusiveGateway id="Gateway_CommunityAction" name="Quais ações realiza?" />
+    <bpmn:userTask id="Task_DraftAnswer" name="Elabora resposta" />
+    <bpmn:sendTask id="Send_Answer" name="Publica resposta" />
+    <bpmn:endEvent id="End_Answer" name="Resposta disponibilizada" />
+    <bpmn:userTask id="Task_FlagContent" name="Sinaliza conteúdo" />
+    <bpmn:userTask id="Task_KeepPublication" name="Mantém publicação" />
+    <bpmn:sendTask id="Send_KeepPublication" name="Informa que sinalização não procedeu" />
+    <bpmn:exclusiveGateway id="Gateway_Correctable" name="Problema pode ser corrigido?" default="Flow_S13" />
+    <bpmn:exclusiveGateway id="Gateway_Adequate" name="Correção está adequada?" default="Flow_1ednkew">
+      <bpmn:outgoing>Flow_1ednkew</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:intermediateCatchEvent id="Catch_Correction" name="Correção recebida">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_Correction" messageRef="Message_Correction" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:userTask id="Task_Reevaluate" name="Reavalia correção" />
+    <bpmn:endEvent id="End_Approved" name="Correção aprovada" />
+    <bpmn:sendTask id="Send_Approval" name="Informa manutenção da publicação" />
+    <bpmn:endEvent id="End_FlagClosed" name="Sinalização encerrada" />
+    <bpmn:userTask id="Task_ReviewFlag" name="Analisa sinalização" />
+    <bpmn:exclusiveGateway id="Gateway_Violation" name="Conteúdo viola regras?" default="Flow_S09" />
+    <bpmn:sendTask id="Send_RequestCorrection" name="Solicita correção ao autor" />
+    <bpmn:endEvent id="End_Closed" name="Moderação concluída" />
+    <bpmn:sendTask id="Send_Decision" name="Notifica decisão ao autor" />
+    <bpmn:userTask id="Task_CloseOrRemove" name="Fecha ou remove publicação">
+      <bpmn:incoming>Flow_1ednkew</bpmn:incoming>
+      <bpmn:incoming>Flow_S13</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_S01" sourceRef="Start_Question" targetRef="Task_AnalyzeQuestion" />
+    <bpmn:sequenceFlow id="Flow_S02" sourceRef="Task_AnalyzeQuestion" targetRef="Gateway_CommunityAction" />
+    <bpmn:sequenceFlow id="Flow_S03" name="Responder" sourceRef="Gateway_CommunityAction" targetRef="Task_DraftAnswer">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">podeResponder</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_S06" name="Sinalizar" sourceRef="Gateway_CommunityAction" targetRef="Task_FlagContent">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">deveSinalizar</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_S04" sourceRef="Task_DraftAnswer" targetRef="Send_Answer" />
+    <bpmn:sequenceFlow id="Flow_S05" sourceRef="Send_Answer" targetRef="End_Answer" />
+    <bpmn:sequenceFlow id="Flow_S07" sourceRef="Task_FlagContent" targetRef="Task_ReviewFlag" />
+    <bpmn:sequenceFlow id="Flow_S09" name="Não" sourceRef="Gateway_Violation" targetRef="Task_KeepPublication" />
+    <bpmn:sequenceFlow id="Flow_S10" sourceRef="Task_KeepPublication" targetRef="Send_KeepPublication" />
+    <bpmn:sequenceFlow id="Flow_S10b" sourceRef="Send_KeepPublication" targetRef="End_FlagClosed" />
+    <bpmn:sequenceFlow id="Flow_S11" name="Sim" sourceRef="Gateway_Violation" targetRef="Gateway_Correctable">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">violaRegras</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_S12" name="Sim" sourceRef="Gateway_Correctable" targetRef="Send_RequestCorrection">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">podeSerCorrigido</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_S16" sourceRef="Task_Reevaluate" targetRef="Gateway_Adequate" />
+    <bpmn:sequenceFlow id="Flow_S17" name="Sim" sourceRef="Gateway_Adequate" targetRef="Send_Approval">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">correcaoAdequada</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="Flow_1ednkew" name="Não" sourceRef="Gateway_Adequate" targetRef="Task_CloseOrRemove" />
+    <bpmn:sequenceFlow id="Flow_S13" name="Não" sourceRef="Gateway_Correctable" targetRef="Task_CloseOrRemove" />
+    <bpmn:sequenceFlow id="Flow_S14" sourceRef="Send_RequestCorrection" targetRef="Catch_Correction" />
+    <bpmn:sequenceFlow id="Flow_S15" sourceRef="Catch_Correction" targetRef="Task_Reevaluate" />
+    <bpmn:sequenceFlow id="Flow_S19" sourceRef="Send_Approval" targetRef="End_Approved" />
+    <bpmn:sequenceFlow id="Flow_S08" sourceRef="Task_ReviewFlag" targetRef="Gateway_Violation" />
+    <bpmn:sequenceFlow id="Flow_S22" sourceRef="Send_Decision" targetRef="End_Closed" />
+    <bpmn:sequenceFlow id="Flow_S21" sourceRef="Task_CloseOrRemove" targetRef="Send_Decision" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_StackOverflow_Final">
+    <bpmndi:BPMNPlane id="BPMNPlane_StackOverflow_Final" bpmnElement="Collaboration_StackOverflow_Final">
+      <bpmndi:BPMNShape id="Participant_User_di" bpmnElement="Participant_User" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="3020" height="460" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Doubt_di" bpmnElement="Start_Doubt">
+        <dc:Bounds x="230" y="280" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="214" y="320" width="73" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Search_di" bpmnElement="Task_Search">
+        <dc:Bounds x="300" y="258" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Found_di" bpmnElement="Gateway_Found" isMarkerVisible="true">
+        <dc:Bounds x="460" y="273" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="508.5" y="278" width="63" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Consult_di" bpmnElement="Task_Consult">
+        <dc:Bounds x="550" y="160" width="125" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Send_Question_di" bpmnElement="Send_Question">
+        <dc:Bounds x="1190" y="345" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_WaitFeedback_di" bpmnElement="Gateway_WaitFeedback">
+        <dc:Bounds x="1370" y="360" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1355" y="415" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Catch_Answer_di" bpmnElement="Catch_Answer">
+        <dc:Bounds x="1660" y="235" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1632" y="275" width="92" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Evaluate_di" bpmnElement="Task_Evaluate">
+        <dc:Bounds x="1740" y="213" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Edit_di" bpmnElement="Task_Edit">
+        <dc:Bounds x="2060" y="345" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Send_Correction_di" bpmnElement="Send_Correction">
+        <dc:Bounds x="2210" y="345" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Catch_ModerationResult_di" bpmnElement="Catch_ModerationResult">
+        <dc:Bounds x="2720" y="455" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2690" y="431" width="95" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Kept_di" bpmnElement="Gateway_Kept" isMarkerVisible="true">
+        <dc:Bounds x="2790" y="448" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2781" y="506" width="69" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Moderated_di" bpmnElement="End_Moderated">
+        <dc:Bounds x="2940" y="455" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2973" y="450" width="74" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Logged_di" bpmnElement="Gateway_Logged" isMarkerVisible="true">
+        <dc:Bounds x="565" y="360" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="546" y="415" width="89" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Login_di" bpmnElement="Task_Login">
+        <dc:Bounds x="690" y="345" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Write_di" bpmnElement="Task_Write">
+        <dc:Bounds x="870" y="345" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Tags_di" bpmnElement="Task_Tags">
+        <dc:Bounds x="1030" y="345" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Solved_di" bpmnElement="End_Solved">
+        <dc:Bounds x="2222" y="235" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2211" y="275" width="59" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Accept_di" bpmnElement="Task_Accept">
+        <dc:Bounds x="2060" y="213" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Solved_di" bpmnElement="Gateway_Solved" isMarkerVisible="true">
+        <dc:Bounds x="1925" y="228" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1897" y="190.5" width="106" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Catch_CorrectionRequest_di" bpmnElement="Catch_CorrectionRequest">
+        <dc:Bounds x="1962" y="367" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1932" y="343" width="95" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Existing_di" bpmnElement="End_Existing">
+        <dc:Bounds x="732" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="721" y="222" width="59" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_U01_di" bpmnElement="Flow_U01">
+        <di:waypoint x="266" y="298" />
+        <di:waypoint x="300" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U02_di" bpmnElement="Flow_U02">
+        <di:waypoint x="420" y="298" />
+        <di:waypoint x="460" y="298" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U03_di" bpmnElement="Flow_U03">
+        <di:waypoint x="485" y="273" />
+        <di:waypoint x="485" y="200" />
+        <di:waypoint x="550" y="200" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="513" y="180" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U05_di" bpmnElement="Flow_U05">
+        <di:waypoint x="485" y="323" />
+        <di:waypoint x="485" y="385" />
+        <di:waypoint x="565" y="385" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="521" y="365" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U04_di" bpmnElement="Flow_U04">
+        <di:waypoint x="675" y="200" />
+        <di:waypoint x="732" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U11_di" bpmnElement="Flow_U11">
+        <di:waypoint x="1150" y="385" />
+        <di:waypoint x="1190" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U12_di" bpmnElement="Flow_U12">
+        <di:waypoint x="1310" y="385" />
+        <di:waypoint x="1370" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U20_di" bpmnElement="Flow_U20">
+        <di:waypoint x="1950" y="278" />
+        <di:waypoint x="1950" y="318" />
+        <di:waypoint x="1350" y="318" />
+        <di:waypoint x="1350" y="385" />
+        <di:waypoint x="1370" y="385" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1618" y="298" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U23_di" bpmnElement="Flow_U23">
+        <di:waypoint x="2275" y="425" />
+        <di:waypoint x="2275" y="520" />
+        <di:waypoint x="1350" y="520" />
+        <di:waypoint x="1350" y="385" />
+        <di:waypoint x="1370" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U26_di" bpmnElement="Flow_U26">
+        <di:waypoint x="2815" y="498" />
+        <di:waypoint x="2815" y="505" />
+        <di:waypoint x="1330" y="505" />
+        <di:waypoint x="1330" y="385" />
+        <di:waypoint x="1370" y="385" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2063" y="485" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U13_di" bpmnElement="Flow_U13">
+        <di:waypoint x="1395" y="360" />
+        <di:waypoint x="1395" y="253" />
+        <di:waypoint x="1660" y="253" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U14_di" bpmnElement="Flow_U14">
+        <di:waypoint x="1420" y="385" />
+        <di:waypoint x="1962" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U15_di" bpmnElement="Flow_U15">
+        <di:waypoint x="1395" y="410" />
+        <di:waypoint x="1395" y="473" />
+        <di:waypoint x="2720" y="473" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U16_di" bpmnElement="Flow_U16">
+        <di:waypoint x="1696" y="253" />
+        <di:waypoint x="1740" y="253" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U17_di" bpmnElement="Flow_U17">
+        <di:waypoint x="1860" y="253" />
+        <di:waypoint x="1925" y="253" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U21_di" bpmnElement="Flow_U21">
+        <di:waypoint x="1998" y="385" />
+        <di:waypoint x="2060" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U22_di" bpmnElement="Flow_U22">
+        <di:waypoint x="2180" y="385" />
+        <di:waypoint x="2210" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U25_di" bpmnElement="Flow_U25">
+        <di:waypoint x="2756" y="473" />
+        <di:waypoint x="2790" y="473" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U24_di" bpmnElement="Flow_U24">
+        <di:waypoint x="2840" y="473" />
+        <di:waypoint x="2940" y="473" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2882" y="453" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U06_di" bpmnElement="Flow_U06">
+        <di:waypoint x="615" y="385" />
+        <di:waypoint x="690" y="385" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="647" y="365" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_03skmfd_di" bpmnElement="Flow_03skmfd">
+        <di:waypoint x="590" y="360" />
+        <di:waypoint x="590" y="300" />
+        <di:waypoint x="930" y="300" />
+        <di:waypoint x="930" y="345" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="742" y="303" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cn2zot_di" bpmnElement="Flow_0cn2zot">
+        <di:waypoint x="810" y="385" />
+        <di:waypoint x="870" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U10_di" bpmnElement="Flow_U10">
+        <di:waypoint x="990" y="385" />
+        <di:waypoint x="1030" y="385" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U19_di" bpmnElement="Flow_U19">
+        <di:waypoint x="2180" y="253" />
+        <di:waypoint x="2222" y="253" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_U18_di" bpmnElement="Flow_U18">
+        <di:waypoint x="1975" y="253" />
+        <di:waypoint x="2060" y="253" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2014" y="233" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Participant_StackOverflow_di" bpmnElement="Participant_StackOverflow" isHorizontal="true">
+        <dc:Bounds x="160" y="620" width="3020" height="600" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Community_di" bpmnElement="Lane_Community" isHorizontal="true">
+        <dc:Bounds x="190" y="620" width="2990" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Moderator_di" bpmnElement="Lane_Moderator" isHorizontal="true">
+        <dc:Bounds x="190" y="870" width="2990" height="350" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Question_di" bpmnElement="Start_Question">
+        <dc:Bounds x="1205" y="690" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1178" y="730" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AnalyzeQuestion_di" bpmnElement="Task_AnalyzeQuestion">
+        <dc:Bounds x="1280" y="668" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_CommunityAction_di" bpmnElement="Gateway_CommunityAction" isMarkerVisible="true">
+        <dc:Bounds x="1440" y="683" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1468" y="738" width="103" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_DraftAnswer_di" bpmnElement="Task_DraftAnswer">
+        <dc:Bounds x="1530" y="640" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Send_Answer_di" bpmnElement="Send_Answer">
+        <dc:Bounds x="1680" y="640" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Answer_di" bpmnElement="End_Answer">
+        <dc:Bounds x="1840" y="662" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1822" y="702" width="73" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_FlagContent_di" bpmnElement="Task_FlagContent">
+        <dc:Bounds x="1530" y="760" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_KeepPublication_di" bpmnElement="Task_KeepPublication">
+        <dc:Bounds x="1920" y="1070" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Send_KeepPublication_di" bpmnElement="Send_KeepPublication">
+        <dc:Bounds x="2060" y="1070" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Correctable_di" bpmnElement="Gateway_Correctable" isMarkerVisible="true">
+        <dc:Bounds x="1930" y="925" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1908" y="887.5" width="93" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Adequate_di" bpmnElement="Gateway_Adequate" isMarkerVisible="true">
+        <dc:Bounds x="2470" y="925" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2515" y="936" width="70" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Catch_Correction_di" bpmnElement="Catch_Correction">
+        <dc:Bounds x="2222" y="932" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2195" y="972" width="91" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Reevaluate_di" bpmnElement="Task_Reevaluate">
+        <dc:Bounds x="2310" y="880" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Approved_di" bpmnElement="End_Approved">
+        <dc:Bounds x="2812" y="902" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2783" y="942" width="95" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Send_Approval_di" bpmnElement="Send_Approval">
+        <dc:Bounds x="2580" y="880" width="140" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_FlagClosed_di" bpmnElement="End_FlagClosed">
+        <dc:Bounds x="2262" y="1092" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2252" y="1132" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ReviewFlag_di" bpmnElement="Task_ReviewFlag">
+        <dc:Bounds x="1620" y="970" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Violation_di" bpmnElement="Gateway_Violation" isMarkerVisible="true">
+        <dc:Bounds x="1815" y="985" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1865" y="996.5" width="74" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Send_RequestCorrection_di" bpmnElement="Send_RequestCorrection">
+        <dc:Bounds x="2035" y="910" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Closed_di" bpmnElement="End_Closed">
+        <dc:Bounds x="3092" y="1052" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="3082" y="1092" width="56" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Send_Decision_di" bpmnElement="Send_Decision">
+        <dc:Bounds x="2865" y="1030" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CloseOrRemove_di" bpmnElement="Task_CloseOrRemove">
+        <dc:Bounds x="2625" y="1030" width="130" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_S01_di" bpmnElement="Flow_S01">
+        <di:waypoint x="1241" y="708" />
+        <di:waypoint x="1280" y="708" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S02_di" bpmnElement="Flow_S02">
+        <di:waypoint x="1400" y="708" />
+        <di:waypoint x="1440" y="708" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S03_di" bpmnElement="Flow_S03">
+        <di:waypoint x="1465" y="683" />
+        <di:waypoint x="1465" y="680" />
+        <di:waypoint x="1530" y="680" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1473" y="660" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S06_di" bpmnElement="Flow_S06">
+        <di:waypoint x="1465" y="733" />
+        <di:waypoint x="1465" y="800" />
+        <di:waypoint x="1530" y="800" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1478" y="780" width="43" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S04_di" bpmnElement="Flow_S04">
+        <di:waypoint x="1650" y="680" />
+        <di:waypoint x="1680" y="680" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S05_di" bpmnElement="Flow_S05">
+        <di:waypoint x="1800" y="680" />
+        <di:waypoint x="1840" y="680" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S07_di" bpmnElement="Flow_S07">
+        <di:waypoint x="1590" y="840" />
+        <di:waypoint x="1590" y="895" />
+        <di:waypoint x="1680" y="895" />
+        <di:waypoint x="1680" y="970" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S09_di" bpmnElement="Flow_S09">
+        <di:waypoint x="1840" y="1035" />
+        <di:waypoint x="1840" y="1110" />
+        <di:waypoint x="1920" y="1110" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1870" y="1090" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S10_di" bpmnElement="Flow_S10">
+        <di:waypoint x="2040" y="1110" />
+        <di:waypoint x="2060" y="1110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S10b_di" bpmnElement="Flow_S10b">
+        <di:waypoint x="2200" y="1110" />
+        <di:waypoint x="2262" y="1110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S11_di" bpmnElement="Flow_S11">
+        <di:waypoint x="1840" y="985" />
+        <di:waypoint x="1840" y="950" />
+        <di:waypoint x="1930" y="950" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1817" y="959" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S12_di" bpmnElement="Flow_S12">
+        <di:waypoint x="1980" y="950" />
+        <di:waypoint x="2035" y="950" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1998" y="930" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S16_di" bpmnElement="Flow_S16">
+        <di:waypoint x="2430" y="920" />
+        <di:waypoint x="2450" y="920" />
+        <di:waypoint x="2450" y="950" />
+        <di:waypoint x="2470" y="950" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S17_di" bpmnElement="Flow_S17">
+        <di:waypoint x="2495" y="925" />
+        <di:waypoint x="2495" y="900" />
+        <di:waypoint x="2580" y="900" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2528" y="880" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ednkew_di" bpmnElement="Flow_1ednkew">
+        <di:waypoint x="2495" y="975" />
+        <di:waypoint x="2495" y="1070" />
+        <di:waypoint x="2625" y="1070" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2542" y="1052" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S13_di" bpmnElement="Flow_S13">
+        <di:waypoint x="1955" y="975" />
+        <di:waypoint x="1955" y="1020" />
+        <di:waypoint x="2690" y="1020" />
+        <di:waypoint x="2690" y="1030" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1965" y="1000" width="21" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S14_di" bpmnElement="Flow_S14">
+        <di:waypoint x="2165" y="950" />
+        <di:waypoint x="2222" y="950" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S15_di" bpmnElement="Flow_S15">
+        <di:waypoint x="2258" y="950" />
+        <di:waypoint x="2284" y="950" />
+        <di:waypoint x="2284" y="920" />
+        <di:waypoint x="2310" y="920" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S19_di" bpmnElement="Flow_S19">
+        <di:waypoint x="2720" y="920" />
+        <di:waypoint x="2812" y="920" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S08_di" bpmnElement="Flow_S08">
+        <di:waypoint x="1740" y="1010" />
+        <di:waypoint x="1815" y="1010" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S22_di" bpmnElement="Flow_S22">
+        <di:waypoint x="2995" y="1070" />
+        <di:waypoint x="3092" y="1070" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S21_di" bpmnElement="Flow_S21">
+        <di:waypoint x="2755" y="1070" />
+        <di:waypoint x="2865" y="1070" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="TextAnnotation_Inclusive_di" bpmnElement="TextAnnotation_Inclusive">
+        <dc:Bounds x="1300" y="790" width="190" height="55" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MessageFlow_Question_di" bpmnElement="MessageFlow_Question">
+        <di:waypoint x="1250" y="425" />
+        <di:waypoint x="1250" y="580" />
+        <di:waypoint x="1223" y="580" />
+        <di:waypoint x="1223" y="690" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1205" y="560" width="95" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Answer_di" bpmnElement="MessageFlow_Answer">
+        <di:waypoint x="1740" y="640" />
+        <di:waypoint x="1740" y="580" />
+        <di:waypoint x="1678" y="580" />
+        <di:waypoint x="1678" y="271" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1684" y="560" width="97" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_CorrectionRequest_di" bpmnElement="MessageFlow_CorrectionRequest">
+        <di:waypoint x="2100" y="910" />
+        <di:waypoint x="2100" y="580" />
+        <di:waypoint x="1980" y="580" />
+        <di:waypoint x="1980" y="403" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2020" y="560" width="115" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Correction_di" bpmnElement="MessageFlow_Correction">
+        <di:waypoint x="2240" y="425" />
+        <di:waypoint x="2240" y="932" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2193" y="882" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Approved_di" bpmnElement="MessageFlow_Approved">
+        <di:waypoint x="2650" y="880" />
+        <di:waypoint x="2650" y="580" />
+        <di:waypoint x="2738" y="580" />
+        <di:waypoint x="2738" y="491" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2625" y="553" width="96" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Decision_di" bpmnElement="MessageFlow_Decision">
+        <di:waypoint x="2930" y="1030" />
+        <di:waypoint x="2930" y="580" />
+        <di:waypoint x="2738" y="580" />
+        <di:waypoint x="2738" y="491" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2829" y="553" width="112" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MessageFlow_Kept_di" bpmnElement="MessageFlow_Kept">
+        <di:waypoint x="2180" y="1070" />
+        <di:waypoint x="2180" y="580" />
+        <di:waypoint x="2738" y="580" />
+        <di:waypoint x="2738" y="491" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2303" y="546" width="54" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_Inclusive_di" bpmnElement="Association_Inclusive">
+        <di:waypoint x="1440" y="733" />
+        <di:waypoint x="1400" y="790" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
