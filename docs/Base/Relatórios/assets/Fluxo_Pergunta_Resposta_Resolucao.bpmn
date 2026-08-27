@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+  id="Definitions_ForumG2"
+  targetNamespace="http://unbarqdsw2026-2-turma02.github.io/G2_ProjetoForum"
+  exporter="bpmn-js"
+  exporterVersion="18.25.1">
+
+  <bpmn:collaboration id="Collaboration_ForumG2">
+    <bpmn:participant id="Participant_Forum" name="Fórum da Comunidade" processRef="Process_Forum" />
+  </bpmn:collaboration>
+
+  <bpmn:process id="Process_Forum" name="Fluxo de pergunta, resposta e resolução" isExecutable="false">
+    <bpmn:documentation>Modelo BPMN inicial da SubEquipe 02. O escopo cobre publicação, disponibilização, resposta, avaliação, aceitação, espera por contribuições e continuidade após fechamento. As tarefas de responder e avaliar foram separadas para manter ações atômicas.</bpmn:documentation>
+
+    <bpmn:laneSet id="LaneSet_Forum">
+      <bpmn:lane id="Lane_Autor" name="Autor da pergunta">
+        <bpmn:flowNodeRef>Start_Question</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Publish</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Monitor</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Resolution</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Accept</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_Resolved</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Community" name="Comunidade">
+        <bpmn:flowNodeRef>Task_Respond</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Evaluate</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Gateway_Closed</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Reopen</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_Platform" name="Plataforma">
+        <bpmn:flowNodeRef>Task_Available</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Event_Wait</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+
+    <bpmn:startEvent id="Start_Question" name="Necessidade identificada">
+      <bpmn:outgoing>Flow_Start_Publish</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="Task_Publish" name="Publica pergunta">
+      <bpmn:incoming>Flow_Start_Publish</bpmn:incoming>
+      <bpmn:outgoing>Flow_Publish_Available</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Available" name="Disponibiliza pergunta">
+      <bpmn:incoming>Flow_Publish_Available</bpmn:incoming>
+      <bpmn:outgoing>Flow_Available_Respond</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Respond" name="Responde à pergunta">
+      <bpmn:incoming>Flow_Available_Respond</bpmn:incoming>
+      <bpmn:incoming>Flow_Wait_Respond</bpmn:incoming>
+      <bpmn:incoming>Flow_Reopen_Respond</bpmn:incoming>
+      <bpmn:outgoing>Flow_Respond_Evaluate</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Evaluate" name="Avalia contribuições">
+      <bpmn:incoming>Flow_Respond_Evaluate</bpmn:incoming>
+      <bpmn:outgoing>Flow_Evaluate_Monitor</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="Task_Monitor" name="Acompanha contribuições">
+      <bpmn:incoming>Flow_Evaluate_Monitor</bpmn:incoming>
+      <bpmn:outgoing>Flow_Monitor_Closed</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="Gateway_Resolution" name="Autor considera resposta suficiente?">
+      <bpmn:incoming>Flow_Closed_No</bpmn:incoming>
+      <bpmn:outgoing>Flow_Resolution_Yes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Resolution_No</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_Accept" name="Marca resposta como aceita">
+      <bpmn:incoming>Flow_Resolution_Yes</bpmn:incoming>
+      <bpmn:outgoing>Flow_Accept_Resolved</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="End_Resolved" name="Pergunta resolvida">
+      <bpmn:incoming>Flow_Accept_Resolved</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateCatchEvent id="Event_Wait" name="Período de espera encerrado">
+      <bpmn:incoming>Flow_Resolution_No</bpmn:incoming>
+      <bpmn:outgoing>Flow_Wait_Respond</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerDefinition_Wait" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="Gateway_Closed" name="Pergunta fechada?">
+      <bpmn:incoming>Flow_Monitor_Closed</bpmn:incoming>
+      <bpmn:outgoing>Flow_Closed_Yes</bpmn:outgoing>
+      <bpmn:outgoing>Flow_Closed_No</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="Task_Reopen" name="Solicita reabertura">
+      <bpmn:incoming>Flow_Closed_Yes</bpmn:incoming>
+      <bpmn:outgoing>Flow_Reopen_Respond</bpmn:outgoing>
+    </bpmn:task>
+
+    <bpmn:sequenceFlow id="Flow_Start_Publish" sourceRef="Start_Question" targetRef="Task_Publish" />
+    <bpmn:sequenceFlow id="Flow_Publish_Available" sourceRef="Task_Publish" targetRef="Task_Available" />
+    <bpmn:sequenceFlow id="Flow_Available_Respond" sourceRef="Task_Available" targetRef="Task_Respond" />
+    <bpmn:sequenceFlow id="Flow_Respond_Evaluate" sourceRef="Task_Respond" targetRef="Task_Evaluate" />
+    <bpmn:sequenceFlow id="Flow_Evaluate_Monitor" sourceRef="Task_Evaluate" targetRef="Task_Monitor" />
+    <bpmn:sequenceFlow id="Flow_Resolution_Yes" name="Sim" sourceRef="Gateway_Resolution" targetRef="Task_Accept" />
+    <bpmn:sequenceFlow id="Flow_Resolution_No" name="Não" sourceRef="Gateway_Resolution" targetRef="Event_Wait" />
+    <bpmn:sequenceFlow id="Flow_Wait_Respond" sourceRef="Event_Wait" targetRef="Task_Respond" />
+    <bpmn:sequenceFlow id="Flow_Monitor_Closed" name="Quando aplicável" sourceRef="Task_Monitor" targetRef="Gateway_Closed" />
+    <bpmn:sequenceFlow id="Flow_Closed_Yes" name="Sim" sourceRef="Gateway_Closed" targetRef="Task_Reopen" />
+    <bpmn:sequenceFlow id="Flow_Closed_No" name="Não" sourceRef="Gateway_Closed" targetRef="Gateway_Resolution" />
+    <bpmn:sequenceFlow id="Flow_Reopen_Respond" sourceRef="Task_Reopen" targetRef="Task_Respond" />
+    <bpmn:sequenceFlow id="Flow_Accept_Resolved" sourceRef="Task_Accept" targetRef="End_Resolved" />
+  </bpmn:process>
+
+  <bpmndi:BPMNDiagram id="BPMNDiagram_Forum">
+    <bpmndi:BPMNPlane id="BPMNPlane_Forum" bpmnElement="Collaboration_ForumG2">
+      <bpmndi:BPMNShape id="Participant_Forum_di" bpmnElement="Participant_Forum" isHorizontal="true">
+        <dc:Bounds x="100" y="80" width="1200" height="520" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Autor_di" bpmnElement="Lane_Autor" isHorizontal="true">
+        <dc:Bounds x="130" y="80" width="1170" height="173" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Community_di" bpmnElement="Lane_Community" isHorizontal="true">
+        <dc:Bounds x="130" y="253" width="1170" height="173" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_Platform_di" bpmnElement="Lane_Platform" isHorizontal="true">
+        <dc:Bounds x="130" y="426" width="1170" height="174" />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Start_Question_di" bpmnElement="Start_Question">
+        <dc:Bounds x="160" y="148" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="145" y="55" width="150" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Publish_di" bpmnElement="Task_Publish">
+        <dc:Bounds x="215" y="128" width="110" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Monitor_di" bpmnElement="Task_Monitor">
+        <dc:Bounds x="380" y="128" width="120" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Resolution_di" bpmnElement="Gateway_Resolution" isMarkerVisible="true">
+        <dc:Bounds x="975" y="143" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="973" y="105" width="55" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Accept_di" bpmnElement="Task_Accept">
+        <dc:Bounds x="1055" y="128" width="150" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_Resolved_di" bpmnElement="End_Resolved">
+        <dc:Bounds x="1225" y="150" width="36" height="36" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNShape id="Task_Respond_di" bpmnElement="Task_Respond">
+        <dc:Bounds x="400" y="300" width="120" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Evaluate_di" bpmnElement="Task_Evaluate">
+        <dc:Bounds x="550" y="300" width="135" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_Closed_di" bpmnElement="Gateway_Closed" isMarkerVisible="true">
+        <dc:Bounds x="720" y="315" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="640" y="350" width="120" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Reopen_di" bpmnElement="Task_Reopen">
+        <dc:Bounds x="800" y="300" width="135" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Available_di" bpmnElement="Task_Available">
+        <dc:Bounds x="250" y="475" width="120" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_Wait_di" bpmnElement="Event_Wait">
+        <dc:Bounds x="760" y="500" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="690" y="543" width="176" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+
+      <bpmndi:BPMNEdge id="Flow_Start_Publish_di" bpmnElement="Flow_Start_Publish">
+        <di:waypoint x="196" y="166" />
+        <di:waypoint x="215" y="166" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Publish_Available_di" bpmnElement="Flow_Publish_Available">
+        <di:waypoint x="270" y="208" />
+        <di:waypoint x="270" y="430" />
+        <di:waypoint x="310" y="430" />
+        <di:waypoint x="310" y="475" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Available_Respond_di" bpmnElement="Flow_Available_Respond">
+        <di:waypoint x="370" y="515" />
+        <di:waypoint x="390" y="515" />
+        <di:waypoint x="390" y="340" />
+        <di:waypoint x="400" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Respond_Evaluate_di" bpmnElement="Flow_Respond_Evaluate">
+        <di:waypoint x="520" y="340" />
+        <di:waypoint x="550" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Evaluate_Monitor_di" bpmnElement="Flow_Evaluate_Monitor">
+        <di:waypoint x="685" y="340" />
+        <di:waypoint x="700" y="340" />
+        <di:waypoint x="700" y="240" />
+        <di:waypoint x="440" y="240" />
+        <di:waypoint x="440" y="208" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Resolution_Yes_di" bpmnElement="Flow_Resolution_Yes">
+        <di:waypoint x="1025" y="168" />
+        <di:waypoint x="1055" y="168" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Resolution_No_di" bpmnElement="Flow_Resolution_No">
+        <di:waypoint x="1000" y="193" />
+        <di:waypoint x="1000" y="240" />
+        <di:waypoint x="1100" y="240" />
+        <di:waypoint x="1100" y="450" />
+        <di:waypoint x="778" y="450" />
+        <di:waypoint x="778" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Wait_Respond_di" bpmnElement="Flow_Wait_Respond">
+        <di:waypoint x="760" y="518" />
+        <di:waypoint x="380" y="518" />
+        <di:waypoint x="380" y="340" />
+        <di:waypoint x="400" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Monitor_Closed_di" bpmnElement="Flow_Monitor_Closed">
+        <di:waypoint x="440" y="208" />
+        <di:waypoint x="440" y="280" />
+        <di:waypoint x="745" y="280" />
+        <di:waypoint x="745" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Closed_Yes_di" bpmnElement="Flow_Closed_Yes">
+        <di:waypoint x="770" y="340" />
+        <di:waypoint x="800" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Closed_No_di" bpmnElement="Flow_Closed_No">
+        <di:waypoint x="770" y="340" />
+        <di:waypoint x="785" y="400" />
+        <di:waypoint x="970" y="400" />
+        <di:waypoint x="970" y="168" />
+        <di:waypoint x="975" y="168" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="790" y="350" width="30" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Reopen_Respond_di" bpmnElement="Flow_Reopen_Respond">
+        <di:waypoint x="867" y="380" />
+        <di:waypoint x="867" y="405" />
+        <di:waypoint x="380" y="405" />
+        <di:waypoint x="380" y="340" />
+        <di:waypoint x="400" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_Accept_Resolved_di" bpmnElement="Flow_Accept_Resolved">
+        <di:waypoint x="1205" y="168" />
+        <di:waypoint x="1225" y="168" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
