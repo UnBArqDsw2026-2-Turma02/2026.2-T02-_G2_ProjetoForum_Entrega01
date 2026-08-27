@@ -13,18 +13,42 @@ master) é exercida por **Caio Soares de Andrade**.
 | Liderança Master (coordenação geral) | Caio Soares de Andrade |
 | Liderança - Subequipe_01 | _A definir_ |
 | Liderança - Subequipe_02 | _A definir_ |
-| Liderança - Subequipe_03 | _A definir_ |
+| Liderança - Subequipe_03 | Pedro Felipe Silva Vargas |
 
-## Tabela de rastreabilidade
-
-Registro consolidado de todas as reuniões realizadas pelo grupo, servindo
-como comprobatório de participação e de metodologia adotada. Cada linha deve
-apontar para a ata detalhada correspondente (ver
+As reuniões são registradas em dois grupos, seguindo a mesma divisão usada
+na navegação desta seção: **Reuniões Gerais** (com a equipe toda) e
+**Reuniões por Subequipe** (internas de cada subgrupo). Cada linha das
+tabelas abaixo aponta para a ata detalhada correspondente (ver também o
 [Modelo de Ata](./modelo-ata.md)).
 
-| Nº | Data | Subgrupo | Liderança | Participantes | Pauta | Ata / Comprobatório |
-| :-: | :-: | :-: | :-: | :-: | :-: | :-: |
-| _A preencher_ | | | | | | |
+## Reuniões Gerais
 
-_Conteúdo em desenvolvimento: a tabela será atualizada a cada reunião
+| Nº | Data | Liderança | Participantes | Pauta | Ata / Comprobatório |
+| :-: | :-: | :-: | :-: | :-: | :-: |
+| 1 | 22/08/2026 | Caio Soares de Andrade | 10 de 11 (Leonardo ausente, em aula) | Kickoff: escopo do projeto, divisão dos subgrupos, metodologia Google Design Sprint, ferramentas e cronograma | [Ata 01](./gerais/ata-01-onboarding.md) |
+
+## Reuniões por Subequipe
+
+### SubEquipe_01
+
+| Nº | Data | Participantes | Pauta | Ata / Comprobatório |
+| :-: | :-: | :-: | :-: | :-: |
+| _A preencher_ | | | | |
+
+### SubEquipe_02
+
+| Nº | Data | Participantes | Pauta | Ata / Comprobatório |
+| :-: | :-: | :-: | :-: | :-: |
+| _A preencher_ | | | | |
+
+### SubEquipe_03
+
+| Nº | Data | Participantes | Pauta | Ata / Comprobatório |
+| :-: | :-: | :-: | :-: | :-: |
+| 1 | 22/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury, Pedro Vargas (todos presentes) | Onboarding: repositório, nome oficial do projeto e análise inicial da monetização do Stack Overflow | [Ata 01](./subequipe_03/ata-01-onboarding.md) |
+| 2 | 25/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury, Pedro Vargas (todos presentes) | Rich Picture: consolidação dos esboços em um modelo único, com foco no ecossistema financeiro do fórum | [Ata 02](./subequipe_03/ata-02-rich-picture.md) |
+| 3 | 25/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury, Pedro Vargas (todos presentes) | NFR: finalização do diagrama SIG do NFR Framework, com apoio de IA generativa na geração da imagem | [Ata 03](./subequipe_03/ata-03-nfr.md) |
+| 4 | 27/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury (atrasado), Pedro Vargas | BPMN: validação do NFR, refinamento do Ishikawa, apresentação do BPMN de monetização e organização do fechamento da documentação | [Ata 04](./subequipe_03/ata-04-bpmn.md) |
+
+_Conteúdo em desenvolvimento: as tabelas serão atualizadas a cada reunião
 realizada pelo grupo ao longo da entrega._
