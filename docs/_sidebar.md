@@ -17,3 +17,13 @@
     - 1.3.4. Atas de Reunião e Rastreabilidade
       - [1.3.4.1. Rastreabilidade das Reuniões](/Base/iniciativas_extras/atas_reuniao/rastreabilidade.md)
       - [1.3.4.2. Modelo de Ata](/Base/iniciativas_extras/atas_reuniao/modelo-ata.md)
+      - 1.3.4.3. Reuniões Gerais
+        - [1.3.4.3.1. Ata 01 - Onboarding da Equipe](/Base/iniciativas_extras/atas_reuniao/gerais/ata-01-onboarding.md)
+      - 1.3.4.4. Reuniões por Subequipe
+        - SubEquipe_01 _(sem reuniões registradas)_
+        - SubEquipe_02 _(sem reuniões registradas)_
+        - 1.3.4.4.3. SubEquipe_03
+          - [1.3.4.4.3.1. Ata 01 - Onboarding](/Base/iniciativas_extras/atas_reuniao/subequipe_03/ata-01-onboarding.md)
+          - [1.3.4.4.3.2. Ata 02 - Rich Picture](/Base/iniciativas_extras/atas_reuniao/subequipe_03/ata-02-rich-picture.md)
+          - [1.3.4.4.3.3. Ata 03 - NFR](/Base/iniciativas_extras/atas_reuniao/subequipe_03/ata-03-nfr.md)
+          - [1.3.4.4.3.4. Ata 04 - BPMN](/Base/iniciativas_extras/atas_reuniao/subequipe_03/ata-04-bpmn.md)
