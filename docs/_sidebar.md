@@ -17,3 +17,9 @@
     - 1.3.4. Atas de Reunião e Rastreabilidade
       - [1.3.4.1. Rastreabilidade das Reuniões](/Base/iniciativas_extras/atas_reuniao/rastreabilidade.md)
       - [1.3.4.2. Modelo de Ata](/Base/iniciativas_extras/atas_reuniao/modelo-ata.md)
+      - 1.3.4.3. Reuniões Gerais
+        - [1.3.4.3.1. Ata 01 - Onboarding da Equipe](/Base/iniciativas_extras/atas_reuniao/gerais/ata-01-onboarding.md)
+      - 1.3.4.4. Reuniões por Subequipe
+        - SubEquipe_01 _(sem reuniões registradas)_
+        - SubEquipe_02 _(sem reuniões registradas)_
+        - SubEquipe_03 _(em andamento)_
