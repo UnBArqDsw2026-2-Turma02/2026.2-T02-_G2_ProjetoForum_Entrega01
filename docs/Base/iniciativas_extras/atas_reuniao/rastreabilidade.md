@@ -47,6 +47,7 @@ tabelas abaixo aponta para a ata detalhada correspondente (ver também o
 | :-: | :-: | :-: | :-: | :-: |
 | 1 | 22/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury, Pedro Vargas (todos presentes) | Onboarding: repositório, nome oficial do projeto e análise inicial da monetização do Stack Overflow | [Ata 01](./subequipe_03/ata-01-onboarding.md) |
 | 2 | 25/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury, Pedro Vargas (todos presentes) | Rich Picture: consolidação dos esboços em um modelo único, com foco no ecossistema financeiro do fórum | [Ata 02](./subequipe_03/ata-02-rich-picture.md) |
+| 3 | 25/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury, Pedro Vargas (todos presentes) | NFR: finalização do diagrama SIG do NFR Framework, com apoio de IA generativa na geração da imagem | [Ata 03](./subequipe_03/ata-03-nfr.md) |
 
 _Conteúdo em desenvolvimento: as tabelas serão atualizadas a cada reunião
 realizada pelo grupo ao longo da entrega._

@@ -25,3 +25,4 @@
         - 1.3.4.4.3. SubEquipe_03
           - [1.3.4.4.3.1. Ata 01 - Onboarding](/Base/iniciativas_extras/atas_reuniao/subequipe_03/ata-01-onboarding.md)
           - [1.3.4.4.3.2. Ata 02 - Rich Picture](/Base/iniciativas_extras/atas_reuniao/subequipe_03/ata-02-rich-picture.md)
+          - [1.3.4.4.3.3. Ata 03 - NFR](/Base/iniciativas_extras/atas_reuniao/subequipe_03/ata-03-nfr.md)
