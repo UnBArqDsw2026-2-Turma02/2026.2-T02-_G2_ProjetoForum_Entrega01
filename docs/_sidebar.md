@@ -22,4 +22,5 @@
       - 1.3.4.4. Reuniões por Subequipe
         - SubEquipe_01 _(sem reuniões registradas)_
         - SubEquipe_02 _(sem reuniões registradas)_
-        - SubEquipe_03 _(em andamento)_
+        - 1.3.4.4.3. SubEquipe_03
+          - [1.3.4.4.3.1. Ata 01 - Onboarding](/Base/iniciativas_extras/atas_reuniao/subequipe_03/ata-01-onboarding.md)

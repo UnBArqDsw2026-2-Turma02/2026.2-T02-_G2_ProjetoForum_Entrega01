@@ -13,7 +13,7 @@ master) é exercida por **Caio Soares de Andrade**.
 | Liderança Master (coordenação geral) | Caio Soares de Andrade |
 | Liderança - Subequipe_01 | _A definir_ |
 | Liderança - Subequipe_02 | _A definir_ |
-| Liderança - Subequipe_03 | _A definir_ |
+| Liderança - Subequipe_03 | Pedro Felipe Silva Vargas |
 
 As reuniões são registradas em dois grupos, seguindo a mesma divisão usada
 na navegação desta seção: **Reuniões Gerais** (com a equipe toda) e
@@ -45,7 +45,7 @@ tabelas abaixo aponta para a ata detalhada correspondente (ver também o
 
 | Nº | Data | Participantes | Pauta | Ata / Comprobatório |
 | :-: | :-: | :-: | :-: | :-: |
-| _A preencher_ | | | | |
+| 1 | 22/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury, Pedro Vargas (todos presentes) | Onboarding: repositório, nome oficial do projeto e análise inicial da monetização do Stack Overflow | [Ata 01](./subequipe_03/ata-01-onboarding.md) |
 
 _Conteúdo em desenvolvimento: as tabelas serão atualizadas a cada reunião
 realizada pelo grupo ao longo da entrega._

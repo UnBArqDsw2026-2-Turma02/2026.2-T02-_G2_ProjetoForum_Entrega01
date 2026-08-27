@@ -65,7 +65,9 @@ build ou execução de código para visualizá-la.
     - [1.3.4.2. Modelo de Ata](./Base/iniciativas_extras/atas_reuniao/modelo-ata.md)
     - 1.3.4.3. Reuniões Gerais
       - [1.3.4.3.1. Ata 01 - Onboarding da Equipe](./Base/iniciativas_extras/atas_reuniao/gerais/ata-01-onboarding.md)
-    - 1.3.4.4. Reuniões por Subequipe (SubEquipe_01, SubEquipe_02, SubEquipe_03)
+    - 1.3.4.4. Reuniões por Subequipe
+      - 1.3.4.4.3. SubEquipe_03
+        - [1.3.4.4.3.1. Ata 01 - Onboarding](./Base/iniciativas_extras/atas_reuniao/subequipe_03/ata-01-onboarding.md)
 
 ### [Projetos](./Projeto/Projeto.md)
 
