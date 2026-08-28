@@ -49,6 +49,7 @@ tabelas abaixo aponta para a ata detalhada correspondente (ver também o
 | 2 | 25/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury, Pedro Vargas (todos presentes) | Rich Picture: consolidação dos esboços em um modelo único, com foco no ecossistema financeiro do fórum | [Ata 02](./subequipe_03/ata-02-rich-picture.md) |
 | 3 | 25/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury, Pedro Vargas (todos presentes) | NFR: finalização do diagrama SIG do NFR Framework, com apoio de IA generativa na geração da imagem | [Ata 03](./subequipe_03/ata-03-nfr.md) |
 | 4 | 27/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury (atrasado), Pedro Vargas | BPMN: validação do NFR, refinamento do Ishikawa, apresentação do BPMN de monetização e organização do fechamento da documentação | [Ata 04](./subequipe_03/ata-04-bpmn.md) |
+| 5 | 27/08/2026 | Alberto Côrtes, Bruno Souza, Kaio Amoury, Pedro Vargas (todos presentes) | Sprint Review e Retrospectiva: revisão de diagramas e relatório, requisitos oficiais de entrega e estratégia de apresentação final | [Ata 05](./subequipe_03/ata-05-sprint-review.md) |
 
 _Conteúdo em desenvolvimento: as tabelas serão atualizadas a cada reunião
 realizada pelo grupo ao longo da entrega._
