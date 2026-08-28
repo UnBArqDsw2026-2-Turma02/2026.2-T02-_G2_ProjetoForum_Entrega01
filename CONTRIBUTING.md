@@ -55,3 +55,30 @@ A documentação segue o template oficial da disciplina, organizada em
 `docs/Base` e `docs/Projeto`. Não omita seções exigidas pelo template; se uma
 seção ainda não tiver conteúdo, deixe um placeholder claro indicando que está
 pendente, em vez de removê-la.
+
+## 6. Legenda das imagens
+
+Toda imagem de engenharia reversa (print de tela, diagrama, print de
+ferramenta) deve ter uma legenda logo abaixo, no seguinte formato:
+
+```html
+<p align="center">
+  <img src="Base/Assets/SubEquipe_0X/nome-do-arquivo.png" alt="Descrição da imagem" width="600">
+</p>
+<p align="center"><b>Figura N</b> — Descrição breve do que a imagem mostra.<br>
+<b>Fonte:</b> origem da imagem (site, ferramenta, "Elaborado pela SubEquipe 0X", etc.).</p>
+```
+
+- O caminho da imagem em `src` deve ser relativo à raiz de `docs/` (ex.:
+  `Base/Assets/SubEquipe_03/arquivo.png`), sem `./` nem `../` no início.
+  Isso é necessário por causa do roteamento por hash do docsify: um `<img>`
+  em HTML puro é resolvido a partir da raiz, não da pasta do arquivo
+  `.md`. Sintaxe `![]()` de markdown segue outra regra (relativa ao
+  arquivo) e não deve ser usada para imagens de engenharia reversa, para
+  evitar essa inconsistência.
+- A numeração das Figuras é **sequencial pelo documento inteiro**,
+  seguindo a ordem em que as imagens aparecem no arquivo (não reinicia por
+  seção nem por autor). Antes de adicionar uma imagem nova, confira qual é
+  a última Figura já numerada no arquivo e continue a partir dela. Se você
+  inserir uma imagem antes de figuras já numeradas, renumere as
+  seguintes.
