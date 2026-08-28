@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Rich Picture complementar — experiência de resolução e continuidade</title>
+  <desc id="desc">Representação dos atores, relações, preocupações e caminhos de continuidade envolvidos na resolução de perguntas em um fórum.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#334155"/>
+    </marker>
+    <marker id="arrowDashed" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/>
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#94a3b8" flood-opacity="0.25"/>
+    </filter>
+    <style>
+      .title { font: 700 32px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 400 18px Arial, sans-serif; fill: #475569; }
+      .heading { font: 700 23px Arial, sans-serif; fill: #0f172a; }
+      .body { font: 400 17px Arial, sans-serif; fill: #334155; }
+      .small { font: 400 15px Arial, sans-serif; fill: #475569; }
+      .label { font: 600 15px Arial, sans-serif; fill: #334155; }
+      .actor { fill: #e0f2fe; stroke: #0284c7; stroke-width: 2; }
+      .platform { fill: #f1f5f9; stroke: #64748b; stroke-width: 2; }
+      .object { fill: #fef3c7; stroke: #d97706; stroke-width: 2; }
+      .continuity { fill: #dcfce7; stroke: #16a34a; stroke-width: 2; }
+      .concern { fill: #fce7f3; stroke: #db2777; stroke-width: 2; }
+      .moderation { fill: #ede9fe; stroke: #7c3aed; stroke-width: 2; }
+      .card { stroke-linejoin: round; }
+      .flow { fill: none; stroke: #334155; stroke-width: 3; marker-end: url(#arrow); }
+      .optional { fill: none; stroke: #64748b; stroke-width: 2.5; stroke-dasharray: 10 8; marker-end: url(#arrowDashed); }
+      .pill { fill: #fff; stroke: #cbd5e1; stroke-width: 1.5; }
+    </style>
+  </defs>
+
+  <rect width="1800" height="1200" fill="#ffffff"/>
+  <text x="900" y="48" text-anchor="middle" class="title">Rich Picture complementar</text>
+  <text x="900" y="78" text-anchor="middle" class="subtitle">Experiência de resolução e continuidade no fórum</text>
+
+  <!-- Plataforma -->
+  <g filter="url(#shadow)">
+    <rect x="690" y="125" width="420" height="125" rx="22" class="platform card"/>
+    <text x="900" y="166" text-anchor="middle" class="heading">Plataforma</text>
+    <text x="900" y="198" text-anchor="middle" class="body">organiza conteúdo, feedback e estados</text>
+    <text x="900" y="224" text-anchor="middle" class="small">publicação • visibilidade • sinalização</text>
+  </g>
+
+  <!-- Preocupações -->
+  <g filter="url(#shadow)">
+    <rect x="1270" y="105" width="455" height="175" rx="22" class="concern card"/>
+    <text x="1295" y="143" class="heading">Preocupações em jogo</text>
+    <text x="1295" y="176" class="body">• resposta aceita ≠ verdade absoluta</text>
+    <text x="1295" y="204" class="body">• avaliação coletiva ≠ aceitação pessoal</text>
+    <text x="1295" y="232" class="body">• participação aberta × moderação</text>
+    <text x="1295" y="260" class="small">A resolução pode permanecer parcial ou evoluir.</text>
+  </g>
+
+  <!-- Autor -->
+  <g filter="url(#shadow)">
+    <rect x="90" y="335" width="390" height="220" rx="22" class="actor card"/>
+    <circle cx="145" cy="395" r="24" fill="#0284c7"/>
+    <path d="M110 462 Q145 420 180 462" fill="none" stroke="#0284c7" stroke-width="16" stroke-linecap="round"/>
+    <text x="205" y="397" class="heading">Autor da pergunta</text>
+    <text x="205" y="431" class="body">“Preciso de uma solução”</text>
+    <text x="125" y="495" class="small">publica, acompanha e avalia as contribuições</text>
+    <text x="125" y="522" class="small">pode aceitar uma resposta ou continuar buscando</text>
+  </g>
+
+  <!-- Pergunta central -->
+  <g filter="url(#shadow)">
+    <rect x="650" y="350" width="500" height="255" rx="28" class="object card"/>
+    <text x="900" y="407" text-anchor="middle" class="heading">Pergunta em busca de resolução</text>
+    <text x="900" y="442" text-anchor="middle" class="body">uma necessidade individual torna-se</text>
+    <text x="900" y="468" text-anchor="middle" class="body">objeto público de colaboração</text>
+    <rect x="700" y="500" width="105" height="36" rx="18" class="pill"/>
+    <rect x="820" y="500" width="145" height="36" rx="18" class="pill"/>
+    <rect x="980" y="500" width="120" height="36" rx="18" class="pill"/>
+    <text x="752" y="524" text-anchor="middle" class="label">aberta</text>
+    <text x="892" y="524" text-anchor="middle" class="label">sem resposta</text>
+    <text x="1040" y="524" text-anchor="middle" class="label">resolvida</text>
+    <text x="900" y="572" text-anchor="middle" class="small">o estado pode mudar conforme a colaboração evolui</text>
+  </g>
+
+  <!-- Comunidade -->
+  <g filter="url(#shadow)">
+    <rect x="1320" y="335" width="390" height="220" rx="22" class="actor card"/>
+    <circle cx="1370" cy="395" r="21" fill="#0284c7"/>
+    <circle cx="1420" cy="390" r="21" fill="#0369a1"/>
+    <path d="M1338 462 Q1370 425 1402 462 M1387 462 Q1420 420 1453 462" fill="none" stroke="#0284c7" stroke-width="13" stroke-linecap="round"/>
+    <text x="1470" y="397" class="heading">Comunidade</text>
+    <text x="1470" y="431" class="body">“Essa contribuição ajuda?”</text>
+    <text x="1355" y="495" class="small">responde, comenta, vota e participa da revisão</text>
+    <text x="1355" y="522" class="small">avalia qualidade sem determinar a resolução pessoal</text>
+  </g>
+
+  <!-- Contribuidor -->
+  <g filter="url(#shadow)">
+    <rect x="90" y="735" width="390" height="220" rx="22" class="actor card"/>
+    <circle cx="145" cy="795" r="24" fill="#0284c7"/>
+    <path d="M110 862 Q145 820 180 862" fill="none" stroke="#0284c7" stroke-width="16" stroke-linecap="round"/>
+    <text x="205" y="797" class="heading">Contribuidor</text>
+    <text x="205" y="831" class="body">“Posso contribuir?”</text>
+    <text x="125" y="895" class="small">elabora uma resposta e pode complementar</text>
+    <text x="125" y="922" class="small">ou melhorar a contribuição existente</text>
+  </g>
+
+  <!-- Resposta e avaliação -->
+  <g filter="url(#shadow)">
+    <rect x="1280" y="735" width="430" height="220" rx="22" class="object card"/>
+    <text x="1495" y="797" text-anchor="middle" class="heading">Resposta e avaliação</text>
+    <text x="1495" y="831" text-anchor="middle" class="body">respostas • comentários • votos</text>
+    <text x="1495" y="873" text-anchor="middle" class="small">A comunidade sinaliza utilidade e qualidade.</text>
+    <text x="1495" y="902" text-anchor="middle" class="small">O autor pode reconhecer uma solução.</text>
+    <text x="1495" y="931" text-anchor="middle" class="small">Aceitação e votação têm significados distintos.</text>
+  </g>
+
+  <!-- Moderação -->
+  <g filter="url(#shadow)">
+    <rect x="1290" y="1000" width="400" height="120" rx="22" class="moderation card"/>
+    <text x="1490" y="1043" text-anchor="middle" class="heading">Moderação / revisão</text>
+    <text x="1490" y="1075" text-anchor="middle" class="body">preserva qualidade e organiza estados</text>
+    <text x="1490" y="1100" text-anchor="middle" class="small">fechamento • reabertura • revisão comunitária</text>
+  </g>
+
+  <!-- Caminhos de continuidade -->
+  <g filter="url(#shadow)">
+    <rect x="590" y="930" width="590" height="190" rx="24" class="continuity card"/>
+    <text x="885" y="972" text-anchor="middle" class="heading">Caminhos de continuidade</text>
+    <text x="625" y="1010" class="body">• aguardar novas contribuições</text>
+    <text x="625" y="1040" class="body">• melhorar a pergunta ou oferecer bounty</text>
+    <text x="625" y="1070" class="body">• aceitar uma resposta e alcançar resolução pessoal</text>
+    <text x="625" y="1100" class="body">• fechar e solicitar reabertura quando necessário</text>
+  </g>
+
+  <!-- Relações -->
+  <path d="M480 430 C555 430 585 430 650 430" class="flow"/>
+  <rect x="505" y="392" width="135" height="28" rx="14" fill="#fff"/>
+  <text x="572" y="412" text-anchor="middle" class="label">publica / acompanha</text>
+
+  <path d="M650 520 C575 520 550 520 480 520" class="optional"/>
+  <rect x="505" y="535" width="135" height="28" rx="14" fill="#fff"/>
+  <text x="572" y="555" text-anchor="middle" class="label">feedback e estado</text>
+
+  <path d="M900 250 L900 350" class="flow"/>
+  <rect x="920" y="277" width="145" height="28" rx="14" fill="#fff"/>
+  <text x="992" y="297" text-anchor="middle" class="label">organiza e sinaliza</text>
+
+  <path d="M1110 190 C1190 190 1225 200 1270 205" class="optional"/>
+  <text x="1175" y="174" text-anchor="middle" class="label">torna tensões visíveis</text>
+
+  <path d="M1320 440 C1255 440 1210 440 1150 440" class="flow"/>
+  <rect x="1190" y="402" width="125" height="28" rx="14" fill="#fff"/>
+  <text x="1252" y="422" text-anchor="middle" class="label">interage com</text>
+
+  <path d="M480 830 C700 760 1050 735 1280 830" class="flow"/>
+  <rect x="560" y="735" width="170" height="28" rx="14" fill="#fff"/>
+  <text x="645" y="755" text-anchor="middle" class="label">produz resposta</text>
+
+  <path d="M1150 545 C1220 620 1300 690 1435 735" class="flow"/>
+  <rect x="1210" y="565" width="170" height="28" rx="14" fill="#fff"/>
+  <text x="1295" y="585" text-anchor="middle" class="label">gera colaboração</text>
+
+  <path d="M1515 555 C1515 620 1495 670 1495 735" class="optional"/>
+  <rect x="1540" y="625" width="150" height="28" rx="14" fill="#fff"/>
+  <text x="1615" y="645" text-anchor="middle" class="label">comenta / vota</text>
+
+  <path d="M1280 820 C1190 900 1050 860 1000 750 C975 690 1000 635 1040 605" class="optional"/>
+  <rect x="1035" y="880" width="190" height="28" rx="14" fill="#fff"/>
+  <text x="1130" y="900" text-anchor="middle" class="label">informa a resolução</text>
+
+  <path d="M900 605 L885 930" class="optional"/>
+  <rect x="650" y="880" width="210" height="28" rx="14" fill="#fff"/>
+  <text x="755" y="900" text-anchor="middle" class="label">pode seguir caminhos</text>
+
+  <path d="M1180 1030 C1230 1030 1240 1040 1290 1050" class="optional"/>
+  <text x="1230" y="1012" text-anchor="middle" class="label">pode exigir revisão</text>
+
+  <path d="M1290 1080 C1210 1160 1130 1165 1060 1120" class="optional"/>
+  <text x="1195" y="1162" text-anchor="middle" class="label">reabre → colaboração</text>
+
+  <!-- Base dos achados -->
+  <rect x="90" y="1030" width="430" height="90" rx="18" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+  <text x="115" y="1060" class="label">Base da representação</text>
+  <text x="115" y="1087" class="small">ER-C01 publicação • ER-C02 colaboração e avaliação</text>
+  <text x="115" y="1112" class="small">ER-C03 aceitação • ER-C04 continuidade</text>
+</svg>
