@@ -7,6 +7,26 @@
   <meta name="description" content="Documentação do projeto G2 - Fórum (Arquitetura e Desenho de Software - UnB)">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <style>
+    /* Seta indicando secoes do menu lateral com dropdown (docsify-sidebar-collapse) */
+    .sidebar-nav li.folder {
+      position: relative;
+    }
+    .sidebar-nav li.folder::after {
+      content: '▸';
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      font-size: 12px;
+      color: #9a9a9a;
+      transition: transform 0.2s ease, color 0.2s ease;
+      pointer-events: none;
+    }
+    .sidebar-nav li.folder.open::after {
+      color: #42b983;
+      transform: rotate(90deg);
+    }
+  </style>
 </head>
 <body>
   <div id="app"></div>
