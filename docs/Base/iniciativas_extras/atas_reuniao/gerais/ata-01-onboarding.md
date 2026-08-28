@@ -57,7 +57,7 @@ quarta-feira para deixar um dia de revisão (00:00:00).
 subdomínios, cada um sob responsabilidade de um subgrupo:
 - Subdomínio 1, Conteúdo: Caio de Andrade, Maria Laura, Zarbielli e Artur.
 - Subdomínio 2, Comunidade: Bruno, Leonardo e Luís Guilherme.
-- Subdomínio 3, Monetização: Pedro Vargas, Alberto Côrtes, Caio e Bruno.
+- Subdomínio 3, Monetização: Pedro Vargas, Alberto Côrtes, Kaio e Bruno.
 (00:01:52)
 
 **Metodologia de trabalho (Google Design Sprint).** O grupo adotou o Google
